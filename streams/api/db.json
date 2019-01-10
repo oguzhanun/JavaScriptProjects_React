@@ -1,0 +1,27 @@
+{
+  "streams": [
+    {
+      "title": "My Stream",
+      "description": "I love to stream...",
+      "id": 1
+    },
+    {
+      "title": "ikinciTitle",
+      "description": "bu da mı olmadı ya...",
+      "id": 2
+    },
+  
+    {
+      "title": "Bu benim title",
+      "description": "Bu da benim description",
+      "userId": "108282575814453587370",
+      "id": 3
+    },
+    {
+      "title": "Navigational Routing",
+      "description": "This is navigational routing example...",
+      "userId": "108282575814453587370",
+      "id": 4
+    }
+  ]
+}

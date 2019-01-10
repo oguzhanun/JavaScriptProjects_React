@@ -6,8 +6,8 @@ class App extends React.Component{
 
     render(){
         return(
-            <div>
-                <PostList />
+            <div className='container ui'>
+                <PostList /> //
             </div>
         );
     }
