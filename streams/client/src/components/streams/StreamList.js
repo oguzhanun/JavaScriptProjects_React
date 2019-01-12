@@ -73,6 +73,10 @@ class StreamList extends React.Component {
 
 const mapStateToProps = (state) => {
 
+    // Object.values() metodu nesne içindeki değeri bize geri döndürür. Burada geri dönen sonuç 
+    // yaptığımız kayıtlar reducer a girerken ekstradan id değerlerine eşitlenerek kaydedilmişti.
+    // yani esas obje aynen alınarak objenin içinden bir veri alanına bağlanarak tekrar baştan 
+    // oluşturulmuştu. şimdi bu durumu tersine çevirerek esas veriye erişmek istiyoruz...
     return ( { streams : Object.values( state.streams ),
                currentUserId : state.auth.userId,
                isSignedIn : state.auth.isSignedIn

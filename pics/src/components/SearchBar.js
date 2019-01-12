@@ -17,7 +17,7 @@ class SearchBar extends React.Component{
                              // engelleyen durumu ortadan kaldırıyoruz.
 
         event.preventDefault();
-        this.props.onMySubmit(this.state.term); // bu fonksiyon aracılığıyla searcbar a girilen veri App component i
+        this.props.onMySubmit(this.state.term); // bu fonksiyon aracılığıyla searchbar a girilen veri App component i
         // içindeki onMySubmit ile belirlenen fonksiyona iletiliyor.
     }
 

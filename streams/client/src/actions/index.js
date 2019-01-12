@@ -44,9 +44,14 @@ export const streamFetch = (id) => {
 
 export const streamEdit = (id, formValues) => {
     return async (dispatch) => {
-        const response = await streams.put(`/streams/${id}` , formValues);
+        // Burada patch yerine put koyarsak ve yalnızca değiştirmek istediğimiz verileri stream içine yazarsak
+        // put komutunun bir gereği olarak mevcut eski tüm veriler silinir ve yerine sadece değişen veriler
+        // yazılır. Bunun sonucunda ise değişmeyen veriler kaybolur. Dolayısıyla put yerine patch komutu kullanılarak
+        // yalnızca değişen verilerin yer değiştirmesi ve değimeyen verilerin korunması sağlanır.
+        const response = await streams.patch(`/streams/${id}` , formValues); 
 
         dispatch({type:'STREAM_EDIT', payload : response.data});
+        history.push('/');
     }
 }
 

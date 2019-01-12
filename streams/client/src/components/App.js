@@ -4,7 +4,7 @@ import React from 'react';
 // url history sini kontrol etmek istediğimiz için router a history attribute ını eklememiz gerektiğinden
 // ve BrowserRouter bunu kabul etmediğinden Router kompanentini kullanıyoruz...
 // Link komponent i anchor tag <a> yerine kullanılıyor.
-import {Router, Route, Link} from 'react-router-dom'; 
+import {Router, Route} from 'react-router-dom';  //Link kompanenti buraya girecek...
 
 import StreamCreate from './streams/StreamCreate';
 import StreamList from './streams/StreamList';
@@ -65,7 +65,7 @@ const App = () => {
                     yazılanlar o sayfaya değişken olarak girdi yapılabilecek veriyi içeriyor. */}
                     <Route path='/streams/edit/:id' exact component={StreamEdit}></Route>
                     <Route path='/streams/show/:id' component={StreamShow}></Route>
-                    <Route path='/streams/delete/:id' exact component={StreamDelete}></Route>
+                    <Route path='/streams/delete' exact component={StreamDelete}></Route>
                 </div>
             </Router>
         </div>

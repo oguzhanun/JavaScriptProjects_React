@@ -2,7 +2,7 @@
   "streams": [
     {
       "title": "My Stream",
-      "description": "I love to stream...",
+      "description": "I love to stream when I signed in",
       "id": 1
     },
     {
@@ -10,10 +10,9 @@
       "description": "bu da mı olmadı ya...",
       "id": 2
     },
-  
     {
       "title": "Bu benim title",
-      "description": "Bu da benim description",
+      "description": "Bu da benim put lu description....",
       "userId": "108282575814453587370",
       "id": 3
     },

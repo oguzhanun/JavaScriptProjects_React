@@ -27,7 +27,7 @@ class App extends React.Component {
     }
 
     // onMySubmit property si ile SearchBar componentine bir argüman giriliyor gibi görünse de
-    // aslında property ye eşitlenen bir fonksiyon ve bu fonksiyon SearcBar component inde çağrıldığında bir nevi
+    // aslında property ye eşitlenen bir fonksiyon ve bu fonksiyon SearchBar component inde çağrıldığında bir nevi
     // loop içinde fonksiyona girilen değer child dan parent a geliyor.
     render(){
         return (
