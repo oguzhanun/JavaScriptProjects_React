@@ -65,7 +65,7 @@ const App = () => {
                     yazılanlar o sayfaya değişken olarak girdi yapılabilecek veriyi içeriyor. */}
                     <Route path='/streams/edit/:id' exact component={StreamEdit}></Route>
                     <Route path='/streams/show/:id' component={StreamShow}></Route>
-                    <Route path='/streams/delete' exact component={StreamDelete}></Route>
+                    <Route path='/streams/delete/:id' exact component={StreamDelete}></Route>
                 </div>
             </Router>
         </div>

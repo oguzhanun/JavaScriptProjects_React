@@ -20,15 +20,23 @@ class StreamEdit extends React.Component {
         this.props.streamEdit(this.props.match.params.id , formValues);
     }
 
-    render = () => {
-        //console.log('StreamEdit : ', this.props);
-        console.log(id);
-        console.log(this.props.auth['userId']); //.userId dediğimde userId objesini alamıyorum. ama dizilerde olduğu
+    //.userId dediğimde userId objesini alamıyorum. ama dizilerde olduğu
                                              // gibi [] syntax ini kullanırsam değere ulaşabiliyorum. çok ilginç ?_?_?_?_?_?
                                              // BAŞLANGIÇTA ÜSTTE YAZDIĞIM GİBİYDİ ŞİMDİ NORMALE DÖNDÜ OLAY. NASIL OLDU ANLAMADIM...
                                              // AMA ŞÖYLE BİR ŞEY VAR Kİ O DA ŞU: KOMUT İKİ KEZ ÇAĞRILIYOR İLKİNDE NULL SONRA DEĞER
                                              // DÖNÜYOR. AMA DİĞER TÜRLÜ DİREK TEK ÇAĞRIDA KOMUT ÇALIŞIYORDU... İLGİNÇ... ŞİMDİ O DA AYNI...
-        if(!this.props.stream || ( this.props.auth.userId !== this.props.stream.userId ) ) {
+                                             
+                                             // *-*-*-*-*-*-*-* MEVZU ŞU ŞEKİLDE: BAŞLANGIÇTA USERID ELEMANLARI HEMEN
+                                             // YÜKLENMİYOR. ÇÜNKÜ RENDER METHOD U İÇİNDE KONTROL YAPILMAYA BAŞLANDIĞINDA
+                                             //DAHA COMPONENTDIDMOUNT METHOD U ÇALIŞMIŞ DURUMDA OLMUYOR. BU NEDENLE
+                                             // BAŞLANGIÇTA BUNLARIN VARLIĞI DA KONTROL EDİLEREK IF STATMENT IN KONTROL
+                                             // KISMINDA OR SÜZGECİ EKLENEREK İFADENİN BAŞINA YAZILMALIDIR.
+        
+        render = () => {
+        //console.log('StreamEdit : ', this.props);
+        console.log(id);
+        console.log(this.props.auth['userId']); 
+        if(!this.props.stream || !this.props.auth || ( this.props.auth.userId !== this.props.stream.userId ) ) {
             return(null);
         }
         
@@ -36,8 +44,8 @@ class StreamEdit extends React.Component {
             <div>
                 <h3>Edit a Stream</h3>
 
-                {/** Burada initialValues attribute ı ile StreamForm kompanentine aktarınan objenin herbir verisinin
-                     kullanılması bazı backend server lar için uygun olmadığı için yalnızca değişecek veri hanelerinin
+                {/** Burada initialValues attribute ı ile StreamForm kompanentine aktarılan objenin tüm elemanlarının
+                     kullanılması bazı backend server lar için uygun olmadığından yalnızca değişecek veri hanelerinin
                      alt kompanente iletilmesi daha doğru bir yaklaşımdır. Bunun için de lodash ten çekebileceğimiz
                      metodlar mevcuttur. _.pick(obje, 'obje eleman adı', 'obje eleman adı', 'obje eleman adı')*/}
                 <StreamForm onSubmit={this.onSubmit} initialValues={_.pick(this.props.stream, 'title', 'description')}/> 
