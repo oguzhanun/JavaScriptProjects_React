@@ -11,16 +11,10 @@
       "id": 2
     },
     {
-      "title": "Bu benim title",
-      "description": "Bu da benim put lu description....",
+      "title": "Hello There",
+      "description": "This is the description for Hello There *-*-*-*-*",
       "userId": "108282575814453587370",
       "id": 3
-    },
-    {
-      "title": "Navigational Routing",
-      "description": "This is navigational routing example...",
-      "userId": "108282575814453587370",
-      "id": 4
     }
   ]
 }

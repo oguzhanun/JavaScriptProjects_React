@@ -15,9 +15,9 @@ class StreamCreate extends React.Component {
     }
 
     render (){
-        console.log(this.props);
+        console.log('handle function var mı?: ',this.props);
         return(
-            <div onSubmit={this.props.handleSubmit(this.onSubmit)} className='ui div error'>
+            <div className='ui div error'>
                 <h3>Create a Stream</h3>
                 <StreamForm onSubmit={this.onSubmit}/>
             </div>

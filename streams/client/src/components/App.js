@@ -4,7 +4,7 @@ import React from 'react';
 // url history sini kontrol etmek istediğimiz için router a history attribute ını eklememiz gerektiğinden
 // ve BrowserRouter bunu kabul etmediğinden Router kompanentini kullanıyoruz...
 // Link komponent i anchor tag <a> yerine kullanılıyor.
-import {Router, Route} from 'react-router-dom';  //Link kompanenti buraya girecek...
+import {Router, Route, Switch} from 'react-router-dom';  //Link kompanenti buraya girecek...
 
 import StreamCreate from './streams/StreamCreate';
 import StreamList from './streams/StreamList';
@@ -58,14 +58,21 @@ const App = () => {
             <Router history={history}>
                 <div>
                     <Header/>
-                    <Route path='/' exact component={StreamList}></Route>
-                    <Route path='/streams/new' component={StreamCreate}></Route>
+                    
+                    {/** bu Switch şeysi route lar arasında yalnızca ilk gördüğü uyumu route geri döndürüyor.
+                         bu sorun çoğunlukla :id ve benzeri ifadelerin kullanılması neticesinde vuku buluyor.
+                         çünkü /new ve /:id aynı yola giriyor. yani new ifadesi bir id olarak değerlendiriliyor.
+                    */}
+                    <Switch>
+                        <Route path='/' exact component={StreamList}></Route>
+                        <Route path='/streams/new' exact component={StreamCreate}></Route>
 
-                    {/* iki nokta üst üste den sonrası url de gidilmesi gereken adresi etkilemiyor. : den sonra 
-                    yazılanlar o sayfaya değişken olarak girdi yapılabilecek veriyi içeriyor. */}
-                    <Route path='/streams/edit/:id' exact component={StreamEdit}></Route>
-                    <Route path='/streams/show/:id' component={StreamShow}></Route>
-                    <Route path='/streams/delete/:id' exact component={StreamDelete}></Route>
+                        {/* iki nokta üst üste den sonrası url de gidilmesi gereken adresi etkilemiyor. : den sonra 
+                        yazılanlar o sayfaya değişken olarak girdi yapılabilecek veriyi içeriyor. */}
+                        <Route path='/streams/edit/:id' exact component={StreamEdit}></Route>
+                        <Route path='/streams/:id' exact component={StreamShow}></Route>
+                        <Route path='/streams/delete/:id' exact component={StreamDelete}></Route>
+                    </Switch>
                 </div>
             </Router>
         </div>
