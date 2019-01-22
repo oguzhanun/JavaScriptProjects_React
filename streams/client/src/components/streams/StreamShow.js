@@ -16,7 +16,6 @@ class StreamShow extends React.Component {
         this.buildPlayer();
     }
 
-
     // componentdidmount yalnızca bir kez çalışıyor ve orada çağrılan async streamFetch komutu beklenenden geç bir
     // zamanda sonuçlanabilir ve bu sırada buildplayer kod bloğu çalıştırılırken stream uygun olmadığında video
     // tag i de çalışmayacağından videoRef i oluşturamayabiliriz ve yine hata alırız. bunu önlemek için componentDidUpdate
