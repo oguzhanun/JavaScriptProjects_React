@@ -13,7 +13,7 @@ class ImageCard extends React.Component{
     }
 
     componentDidMount (){
-        
+        //img componenti yüklendiğinde setSpans fonksiyonu çalışsın...
        this.imageRef.current.addEventListener('load',this.setSpans);
         
         //console.log(this.imageRef);

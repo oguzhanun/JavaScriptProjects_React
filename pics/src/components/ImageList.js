@@ -9,8 +9,10 @@ const ImageList = (props) =>{
     //});
 
     return(
-        <div className='image-list'>{props.images.map( (image) => {
-            return(<ImageCard  key={image.id} imageSend={image}/>);})
+        <div className='image-list'>{props.images.map( (image) => 
+        {
+            return(<ImageCard  key={image.id} imageSend={image}/>);
+        })
         }</div>
     );
 }

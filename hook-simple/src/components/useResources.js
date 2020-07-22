@@ -27,11 +27,17 @@ const useResources = (resource) => {
     useEffect( () => {
         fetchResource( resource )
 
+        
+        // *** BURADA İLK PARANTEZ İÇİNDEKİ FONKSİYON BİR DEFINITION YANİ BİR TANIMLAMA, İKİNCİ BİR PARANTEZ
+        // İLE BU TANIMLADIĞIMIZ BU FONKSİYON ÇALIŞTIRILMIŞ OLUYOR. VE ARGÜMAN OLARAK DA İKİNCİ PARANTEZ 
+        // İÇİNDEKİ DEĞİŞKENİ ALARAK ÇALIŞIYOR. YANİ BURADA ASLINDA BİR NEVİ ASYNC OLAN FONKSİYON ÇALIŞTIRILMIŞ
+        // HALDE USEEFFECT İÇİNE DAHİL OLUYOR. YANİ HAM HALDE DEĞİL.***
+
         // (async (resource) => {
         //     const returning = await axios.get(`https://jsonplaceholder.typicode.com/${resource}`);
         //     setResponse( returning.data );
-
         // })(resource)
+        
     }, [ resource ] );
 
     return response;

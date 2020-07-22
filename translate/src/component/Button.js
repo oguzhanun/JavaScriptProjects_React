@@ -24,13 +24,17 @@ class Button extends React.Component{
         return (
             <ColorContext.Consumer>{
                 (color) => {
-                    return (<button className={`ui button ${color}`}>
-                        <LanguageContext.Consumer>{({language}) => {
-                            return (this.renderButton(language));
-                        }}
-                        </LanguageContext.Consumer>
-                    </button>);
-                }}</ColorContext.Consumer>
+                    return (
+                        <button className={`ui button ${color}`}>
+                            <LanguageContext.Consumer>{({language}) => {
+                                    return (this.renderButton(language));
+                                }
+                            }
+                            </LanguageContext.Consumer>
+                        </button>
+                    );
+                }
+            }</ColorContext.Consumer>
         );
     }
 }

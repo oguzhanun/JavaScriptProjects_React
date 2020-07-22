@@ -1,80 +1,67 @@
-import JsonPlaceholder from '../apis/JsonPlaceholder';
-import _ from 'lodash';
+import streams from '../apis/streams';
+import history from '../history';
 
 
-export const fetchPostsAndUser = () => async (dispatch, getState) =>{
-
-    // fetchPosts fonksiyonu async bir fonksiyon olduğundan dolayı buradaki 
-    // await özel terimi fonksiyonun dispatch edilmesi için bekleme yapmak zorunda
-    // yani async bir işleme bağlı başka bir işlem de otomatik olarak async olacaktır.
-    // bu nedenle burada da await özel komutunu kullanmamız gerekmektedir.
-    await dispatch( fetchPosts() );
-
-    const userIds = _.uniq(_.map(getState().posts, 'userId'));
-    
-    console.log('Kullanıcı adları burada: ',userIds); // kullanıcı adaları unique olanların _.map fonksiyonu ile
-                                                      // süzülmüş hali buradan incelenebilir.
-
-    userIds.forEach(id => {dispatch(fetchUser(id))}); // burada kullanıcı isimleri fetch ediliyor. sonrasında reducer
-                                                      // içindeki user a dispatch ediliyor. bu sayede userHeader
-                                                      // içinde artık bir action creator çağırmanın anlamıda kalmıyor.
-                                                      // dolayısıyla artık userHeader kompanenti içinde artık bir 
-                                                      // actioncreator invoke etmenin de gereği yok.
-                                                      
-                                                      // burada neden await komutunun beklenmediği konusunu tam olarak
-                                                      // anlamadım. ama zaten forEach fonksiyonu ile birlikte kullanılamıyor
-                                                      // zaten. İlla da kullanmak gerekirse yapılması gereken map
-                                                      // fonksiyonunun kullanılması veya Promis.all() diye bir fonksiyon
-                                                      // ile map fonksiyonunun sarılması gerekebileceğini gösterdi.
-                                                      
-                                                      // anladığım kadarıyla veri doğrudan kullanılmıyor ve başka bir 
-                                                      // kaynakta işleme yapılmadığından zamanlama konusunda bir sorunun
-                                                      // var olmaması burada etkin sanırsam...???_?_?_?_?_?_?_?_?_?
-                                                    
-}
-
-
-export const fetchPosts = () => async dispatch => {
-        const response = await JsonPlaceholder.get('/posts');
-
-        dispatch ({
-            type : 'FETCH_POSTS',
-            payload: response.data
-        });
+export const signIn = (userId) => {
+    return {
+        type : 'SIGN_IN',
+        payload : userId
     };
-
-
-    // Burada herbir userId girdisi için bir kullanıcı ismi çıktısı verilmektedir. 
-    // aynı userId için 10 defa network request işlemi yapılmaktadır. Bu da gereksiz ve
-    // browser ı yoran ve uygulamayı yavaşlatan bir işlemdir. bu nedenle _.memoize fonksiyonu
-    // lodash kütüphanesinden alınarak kullanılmaktadır. bunun da örneği bir sonraki fonksiyon 
-    // bloğunda yer almaktadır.
-
- export const fetchUser =  userId => async dispatch  => {
-    const response = await JsonPlaceholder.get(`/users/${userId}`);
-
-    dispatch ({
-        type : 'FETCH_USER',
-        payload: response.data
-    });
 };
 
+export const signOut = () => {
+    return {
+        type:'SIGN_OUT'
+    };
+};
 
-//*-*-*-*-*-*-*-*-*-*-   MEMOIZE FONKSİYON BLOĞU  -*-*-*-*-*-*-*-*-*-*-*-*-**-*
-// export const fetchUser =  userId => dispatch => { 
- 
-//     _fetchUser(userId,dispatch);
+export const streamCreate = (formValues) => {
+    return async (dispatch, getState) => {
+        const {userId} = getState().auth;
+        const response = await streams.post('/streams',{...formValues, userId});
 
-    
-// };
+        dispatch({type:'STREAM_CREATE', payload : response.data});
 
-//*-*-*-*-*-*-*-*-*-*-   MEMOIZE FONKSİYON BLOĞU (DEVAMI)  -*-*-*-*-*-*-*-*-*-*-*-*-**-*
-// const _fetchUser = _.memoize( async (userId, dispatch) => {
-//         const response = await JsonPlaceholder.get(`/users/${userId}`);
+        // programatik olarak başka bir sayfaya geçmeyi sağlıyor..
+        history.push('/');
 
-//         dispatch ({
-//             type : 'FETCH_USER',
-//             payload: response.data
-//         });
-//     });
+    }
+}
 
+export const streamsFetch = () => {
+    return async (dispatch) => {
+        const response = await streams.get('/streams');
+
+        dispatch({type:'STREAMS_FETCH', payload : response.data});
+    }
+}
+
+export const streamFetch = (id) => {
+    return async (dispatch) => {
+        const response = await streams.get(`/streams/${id}`);
+
+        dispatch({type:'STREAM_FETCH', payload : response.data});
+    }
+}
+
+export const streamEdit = (id, formValues) => {
+    return async (dispatch) => {
+        // Burada patch yerine put koyarsak ve yalnızca değiştirmek istediğimiz verileri stream içine yazarsak
+        // put komutunun bir gereği olarak mevcut eski tüm veriler silinir ve yerine sadece değişen veriler
+        // yazılır. Bunun sonucunda ise değişmeyen veriler kaybolur. Dolayısıyla put yerine patch komutu kullanılarak
+        // yalnızca değişen verilerin yer değiştirmesi ve değimeyen verilerin korunması sağlanır.
+        const response = await streams.patch(`/streams/${id}` , formValues); 
+
+        dispatch({type:'STREAM_EDIT', payload : response.data});
+        history.push('/');
+    }
+}
+
+export const streamDelete = (id) => {
+    return async (dispatch) => {
+        await streams.delete(`/streams/${id}`);
+
+        dispatch({type:'STREAM_DELETE', payload : id});
+        history.push('/');
+    }
+}

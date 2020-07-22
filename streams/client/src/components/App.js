@@ -39,11 +39,7 @@ const PageTwo = () => {
 }
 */
 
-
-
 const App = () => {
-
-
     // eğer kompanentteki attribute yalnızca ismi ile var ve eşitlik hiç yok ise bu o attribute ın "={true}"
     // eşitliğine sahip olduğunu gösteriyor. Yani "exact" attribute ı "exact={true}" olarak işlem görür...
     // exact attribute ı path değerinin tam olarak eşleşmesi gerektiğini ifade etmektedir. bu path i içeren

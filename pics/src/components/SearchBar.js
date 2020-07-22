@@ -13,6 +13,8 @@ class SearchBar extends React.Component{
         console.log("sorry son this is what I have done....");
     }*/
 
+    //bu fonksiyona gerek kalmadı. doğrudan form un onSubmit property si içinden parent in 
+    //fonksiyonunu kullandım.
     onFormSubmit= (event)=>{ // arrow function ile "this" property sinin okunmasını 
                              // engelleyen durumu ortadan kaldırıyoruz.
 
@@ -24,7 +26,13 @@ class SearchBar extends React.Component{
     render(){
         return(
             <div className="ui segment">
-                <form onSubmit={(event)=>this.onFormSubmit(event)} className="ui form">
+                <form onSubmit={(event)=>
+                    {
+                        event.preventDefault();
+                        this.props.onMySubmit(this.state.term);
+                        //this.onFormSubmit(event)
+                    }
+                } className="ui form">
                     <div className="field">
                         <label>Image Search</label>
                         <input type="text" 

@@ -13,11 +13,11 @@ class SongList extends React.Component{
                 <div key={song.title} className='item'>
 
                     <div className='right floated content' style={{verticalAlign:'middle'}}>
-                        <button onClick={() =>{
+                        <button onClick={() =>
+                        {
                            this.props.selectedSong(song);
-                           
-                            
-                        }} className='ui button primary'>Select</button>
+                        }} 
+                        className='ui button primary'>Select</button>
                     </div>
 
                     <div className='content' style={{display:'inline-block'}} >{song.title}</div>

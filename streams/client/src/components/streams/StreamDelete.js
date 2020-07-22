@@ -45,7 +45,9 @@ class StreamDelete extends React.Component {
 
 // eğer butonları tek div altında değil de ayrı ayrı göndermek istersek hata mesajı almamak için React.Fragment tagini
 // kullanabiliriz. Fragment yerine boş tag ler de kullanlabilirdi ancak bunu bazı code kontrol mekanızmaları hata olarak
-// algılayabiliyormuş...
+// algılayabiliyormuş... 
+
+// semantic ui burada butonları aşağı kaydırıyor. tek div geldiğinde
     actions = () => {
         return (
             <React.Fragment>

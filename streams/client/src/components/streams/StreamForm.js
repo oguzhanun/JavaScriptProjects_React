@@ -28,7 +28,7 @@ class StreamForm extends React.Component {
                 // ya da formProps kullanılırsa {...formProps.input}  kullanılabilir...
             <div className={className}>
                 <label>{label}</label>
-                <input {...input}/>
+                <input {...input} autoComplete="off"/>
                 {this.renderErrorMessage(meta)} 
             </div>
 
@@ -50,7 +50,8 @@ class StreamForm extends React.Component {
     render (){
     //    console.log(this.props);
         return(
-            <form onSubmit={this.props.handleSubmit(this.onSubmit)} className='ui form error'>
+            //handleSubmit ile preventDefault metodunu kullanmaya gerek kalmıyor...
+            <form onSubmit={this.props.handleSubmit(this.onSubmit)} className='ui form error'>{/** classname olarak error ifadesi eklenmediğinde semantic ui default olarak önleme yapıyor... */}
                 <Field name='title' component={this.renderInput} label='Enter Title : '></Field>
                 <Field name='description' component={this.renderInput} label='Enter Description : '></Field>
                 <button className='ui button primary'>Submit</button>

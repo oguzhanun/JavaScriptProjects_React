@@ -13,7 +13,9 @@ export class LanguageLogic extends React.Component{
     render() {
         return(
             <LanguageContext.Provider value={{...this.state, onLanguageChange : this.onLanguageChange}}>
-                {this.props.children}
+                {/** this.props.children ile LanguageContext in altına giren tüm child component lerin
+                value nun imkanlarından faydalanmasını ve onu değiştirebilmesini sağlıyoruz... */
+                    this.props.children}
             </LanguageContext.Provider>
         )
     }
